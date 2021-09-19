@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PlanetSeeder extends Seeder
 {
@@ -61,6 +62,6 @@ class PlanetSeeder extends Seeder
             'radius' => 24764,
             'weight' => 1029660
         ]];
-        
+        DB::table('planets')->insert($params);
     }
 }
