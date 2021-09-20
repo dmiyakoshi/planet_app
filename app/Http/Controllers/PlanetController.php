@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Planet;
 use Illuminate\Http\Request;
+
+use function GuzzleHttp\Promise\all;
+use function PHPUnit\Framework\returnSelf;
 
 class PlanetController extends Controller
 {
@@ -13,7 +17,9 @@ class PlanetController extends Controller
      */
     public function index()
     {
-        //
+        $planets = Planet::all();
+
+        return view('planets.index', ['planets' => $planets]);
     }
 
     /**
@@ -23,7 +29,7 @@ class PlanetController extends Controller
      */
     public function create()
     {
-        //
+        return view('planets.create');
     }
 
     /**
@@ -34,7 +40,16 @@ class PlanetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $planet = new Planet();
+
+        $planet->name_ja = $request->name_ja;
+        $planet->name = $request->name;
+        $planet->radius = $request->radius;
+        $planet->weight = $request->weight;
+
+        $planet->save();
+
+        return redirect('/planets');
     }
 
     /**
@@ -45,7 +60,9 @@ class PlanetController extends Controller
      */
     public function show($id)
     {
-        //
+        $planet = Planet::find($id);
+
+        return view('planets.show', ['planet' => $planet]);
     }
 
     /**
@@ -56,7 +73,9 @@ class PlanetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $planet = Planet::find($id);
+
+        return view('planets.edit', ['planet' => $planet]);
     }
 
     /**
@@ -68,7 +87,16 @@ class PlanetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $planet = Planet::find($id);
+
+        $planet->name_ja = $request->name_ja;
+        $planet->name = $request->name;
+        $planet->radius = $request->radius;
+        $planet->weight = $request->weight;
+
+        $planet->save();
+
+        return redirect('/planets');
     }
 
     /**
@@ -79,6 +107,9 @@ class PlanetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $planet = Planet::find($id);
+        $planet->delete();
+
+        return redirect('/planets');
     }
 }
