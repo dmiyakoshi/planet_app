@@ -11,9 +11,9 @@
     <form action="/planets" method="POST">
         @csrf
         <p>名前 <input type="text" name="name_ja" value="{{ old('name_ja') }}"></p>
-        <p>名前(英語) <input type="text" name="name" value="{{ old('planet->name') }}"></p>
-        <p>半径 <input type="number" name="radius" value="{{ old('planet->radius') }}"></p>
-        <p>重量 <input type="number" name="weight" value="{{ old('planet->weight') }}"></p>
+        <p>名前(英語) <input type="text" name="name" value="{{ old('name') }}"></p>
+        <p>半径 <input type="number" name="radius" value="{{ old('radius') }}"></p>
+        <p>重量 <input type="number" name="weight" value="{{ old('weight') }}"></p>
         <input type="submit" value="登録">
     </form>
     <a href="/planets">戻る</a>
